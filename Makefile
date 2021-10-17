@@ -3,9 +3,9 @@ init:
 	git clone https://github.com/UnknownFrom/chat_app_users_api ./services/users_api && \
 	git clone https://github.com/UnknownFrom/chat_app_frontend ./services/frontend
 start:
+	cd ./services/users_api/web/app && composer install
 	cd ./docker && docker-compose up -d
 	migrate -path=./services/users_api/web/public/database/migrator/migrations/ -database "mysql://root:root@tcp(localhost:8989)/test" up
-	cd ./services/users_api/web/app && composer install
 restart:
 	docker-compose down
 	docker-compose up -d

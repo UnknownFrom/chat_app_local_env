@@ -7,14 +7,14 @@ services:
     volumes:
       - "./services/nginx/default.conf:/etc/nginx/conf.d/default.conf"
       #- "./ssl:/etc/ssl"
-      - "../services/users_api:/var/www/html"
+      #- "../services:/var/www/html"
       - "./services/nginx/default.template.conf:/etc/nginx/conf.d/default.template"
     ports:
       - "80:80"
       - "3000:443"
     environment:
       - NGINX_HOST=${NGINX_HOST}
-    command: /bin/sh -c "envsubst '$$NGINX_HOST' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    #command: /bin/sh -c "envsubst '$$NGINX_HOST' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
     restart: always
     depends_on:
       - chat_app_users_api_php
