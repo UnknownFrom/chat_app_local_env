@@ -1,7 +1,7 @@
 
 init:
-	git clone git@github.com:UnknownFrom/chat_app_users_api.git ./services/users_api && \
-	git clone git@github.com:UnknownFrom/chat_app_frontend.git ./services/frontend
+	git clone https://github.com/UnknownFrom/chat_app_users_api ./services/users_api && \
+	git clone https://github.com/UnknownFrom/chat_app_frontend ./services/frontend
 start:
 	docker-compose up -d
 	migrate -path=web/public/database/migrator/migrations/ -database "mysql://root:root@tcp(localhost:8989)/test" up
