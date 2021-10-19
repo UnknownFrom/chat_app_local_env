@@ -30,7 +30,7 @@ services:
       - "./services/users_api/.env"
     volumes:
       - "./services/users_api/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - "../services/users_api:/var/www/html/users_api"
+      - "../services:/var/www/html"
     depends_on:
       - chat_app_mysqldb
 
