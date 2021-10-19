@@ -1,11 +1,8 @@
 # Global
-services
+/services
 
 # Application
 data/
 
 # PHPStorm
-.idea
-
-# VSCode
-.vscode/
+/.idea
