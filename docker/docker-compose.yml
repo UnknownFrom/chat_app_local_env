@@ -20,6 +20,7 @@ services:
       - chat_app_users_api_php
       - chat_app_chat_api_php
       - chat_app_mysqldb
+      - chat_app_frontend_php
 
   chat_app_users_api_php:
     build:
