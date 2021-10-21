@@ -1,0 +1,32 @@
+{
+  "secret": "qwtwetwqgbert",
+  "admin": true,
+  "admin_password": "123",
+  "admin_secret": "123",
+  "web": true,
+  "port": "8081",
+  "connection_lifetime": 0,
+  "anonymous": true,
+  "publish": true,
+  "watch": true,
+  "presence": true,
+  "join_leave": true,
+  "history_size": 10,
+  "history_lifetime": 30,
+  "namespaces": [
+    {
+      "name": "public",
+      "publish": true,
+      "presence": true,
+      "join_leave": true,
+      "anonymous": true,
+      "history_size": 10,
+      "history_lifetime": 30,
+      "recover": true
+    },
+    {
+      "name": "gossips",
+      "watch": true
+    }
+  ]
+}
