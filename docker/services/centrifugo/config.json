@@ -1,8 +1,0 @@
-{
-  "secret": "qwtwetwqgbert",
-  "admin": true,
-  "admin_password": "123",
-  "admin_secret": "123",
-  "web": true,
-  "port": "8086"
-}
