@@ -22,29 +22,6 @@ services:
       - chat_app_mysqldb
       - chat_app_frontend_php
 
-  centrifugo:
-    build:
-      context: ../
-      dockerfile: ./docker/services/centrifugo/Dockerfile
-    volumes:
-      - "./services/centrifugo/config.json:/centrifugo/config.json"
-    command: centrifugo -c config.json
-    ulimits:
-      nofile:
-        soft: 65535
-        hard: 65535
-
-  # Centrifugo
-  chat_app_centrifugo:
-    build:
-      context: ../
-      dockerfile: ./docker/services/centrifugo/Dockerfile
-    command: centrifugo -c config.json --port=8086 --admin
-    ports:
-      - "8086:8086"
-    volumes:
-      - "./services/centrifugo/config.json:/centrifugo/config.json"
-
       # Users_api PHP
   chat_app_users_api_php:
     build:
