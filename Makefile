@@ -10,7 +10,7 @@ start:
 	cd ./docker && docker-compose up -d
 	migrate -path=./services/users_api/web/public/database/migrator/migrations/ -database "mysql://root:root@tcp(localhost:8989)/chat" up
 connect:
-	cd ./services/frontend/assets/js && npm install && node server.js
+	cd ./services/chat_api && npm install && node server.js
 restart:
 	cd ./docker && docker-compose down
 	cd ./docker && docker-compose up -d
