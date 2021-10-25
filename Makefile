@@ -1,8 +1,8 @@
 
 init:
-	git clone https://github.com/UnknownFrom/chat_app_users_api ./services/users_api && \
-	git clone https://github.com/UnknownFrom/chat_app_chat_api ./services/chat_api && \
-	git clone https://github.com/UnknownFrom/chat_app_frontend ./services/frontend
+	git clone git@github.com:UnknownFrom/chat_app_users_api ./services/users_api && \
+	git clone git@github.com:UnknownFrom/chat_app_chat_api ./services/chat_api && \
+	git clone git@github.com:UnknownFrom/chat_app_frontend ./services/frontend
 start:
 	cd ./services/users_api/web/app && composer install
 	cd ./services/frontend/composer && composer install
