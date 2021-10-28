@@ -14,11 +14,10 @@ services:
       - "80:80"
     environment:
       - NGINX_HOST=${NGINX_HOST}
-    restart: always
+    restart: unless-stopped
     depends_on:
       - chat_app_users_api_php
       - chat_app_chat_api_php
-      - chat_app_mysqldb
       - chat_app_frontend_php
 
       # Users_api PHP
@@ -79,8 +78,10 @@ services:
     build:
       context: ../
       dockerfile: ./docker/services/node/Dockerfile
+    volumes:
+      - "../services/chat_api:/var/www/chat_api"
     ports:
-      - "8000:8989"
+      - "8000:8000"
 
       # MySQL
   chat_app_mysqldb:
