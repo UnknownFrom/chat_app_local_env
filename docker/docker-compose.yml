@@ -74,7 +74,15 @@ services:
     depends_on:
       - chat_app_mysqldb
 
-  # MySQL
+  # Node
+  chat_app_nodejs:
+    build:
+      context: ../
+      dockerfile: ./docker/services/node/Dockerfile
+    ports:
+      - "8000:8989"
+
+      # MySQL
   chat_app_mysqldb:
     build:
       context: ../
