@@ -14,10 +14,10 @@ services:
       - "80:80"
     environment:
       - NGINX_HOST=${NGINX_HOST}
-    restart: unless-stopped
+    restart: always
     depends_on:
       - chat_app_users_api_php
-      - chat_app_chat_api_php
+     # - chat_app_chat_api_php
       - chat_app_frontend_php
 
       # Users_api PHP
@@ -27,7 +27,8 @@ services:
       dockerfile: ./docker/services/users_api/Dockerfile
     restart: always
     env_file:
-      - "./services/users_api/.env"
+      - .env
+      #- ./services/users_api/.env
     volumes:
       - "./services/users_api/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - "../services/users_api:/var/www/html/users_api"
@@ -39,6 +40,8 @@ services:
     build:
       context: ../
       dockerfile: ./docker/services/frontend/Dockerfile
+    env_file:
+      - .env
     restart: always
     volumes:
       - "./services/frontend/php.ini:/usr/local/etc/php/conf.d/php.ini"
@@ -47,18 +50,18 @@ services:
       - chat_app_mysqldb
 
   # Chat_api PHP
-  chat_app_chat_api_php:
-    build:
-      context: ../
-      dockerfile: ./docker/services/chat_api/Dockerfile
-    restart: always
-    volumes:
-      - "./services/chat_api/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - "../services/chat_api:/var/www/html/chat_api"
-    depends_on:
-      - chat_app_mysqldb
+  #chat_app_chat_api_php:
+  #  build:
+  #    context: ../
+  #   dockerfile: ./docker/services/chat_api/Dockerfile
+  #  restart: always
+  #  volumes:
+  #    - "./services/chat_api/php.ini:/usr/local/etc/php/conf.d/php.ini"
+  #    - "../services/chat_api:/var/www/html/chat_api"
+  #  depends_on:
+  #    - chat_app_mysqldb
 
-  # PHP myadmin
+  # PHP MyAdmin
   chat_app_myadmin:
     build:
       context: ../
@@ -78,10 +81,14 @@ services:
     build:
       context: ../
       dockerfile: ./docker/services/node/Dockerfile
+    env_file:
+      - .env
     volumes:
       - "../services/chat_api:/var/www/chat_api"
     ports:
       - "8000:8000"
+    depends_on:
+      - chat_app_mysqldb
 
       # MySQL
   chat_app_mysqldb:
@@ -89,9 +96,11 @@ services:
       context: ../
       dockerfile: ./docker/services/mysql/Dockerfile
     container_name: ${MYSQL_HOST}
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     env_file:
-      - "./services/mysql/.env"
+      - .env
+      #- ./services/mysql/.env
     ports:
       - "8989:3306"
     volumes:
