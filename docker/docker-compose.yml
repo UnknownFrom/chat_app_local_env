@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
 
   # NGINX
@@ -86,12 +86,6 @@ services:
     restart: always
     env_file:
       - .env
-    environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_ROOT_USER=${MYSQL_ROOT_USER}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - "8989:3306"
     volumes:
