@@ -17,10 +17,9 @@ services:
     restart: always
     depends_on:
       - chat_app_users_api_php
-     # - chat_app_chat_api_php
       - chat_app_frontend_php
 
-      # Users_api PHP
+  # Users_api PHP
   chat_app_users_api_php:
     build:
       context: ../
@@ -28,7 +27,6 @@ services:
     restart: always
     env_file:
       - .env
-      #- ./services/users_api/.env
     volumes:
       - "./services/users_api/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - "../services/users_api:/var/www/html/users_api"
@@ -48,18 +46,6 @@ services:
       - "../services/frontend:/var/www/html/frontend"
     depends_on:
       - chat_app_mysqldb
-
-  # Chat_api PHP
-  #chat_app_chat_api_php:
-  #  build:
-  #    context: ../
-  #   dockerfile: ./docker/services/chat_api/Dockerfile
-  #  restart: always
-  #  volumes:
-  #    - "./services/chat_api/php.ini:/usr/local/etc/php/conf.d/php.ini"
-  #    - "../services/chat_api:/var/www/html/chat_api"
-  #  depends_on:
-  #    - chat_app_mysqldb
 
   # PHP MyAdmin
   chat_app_myadmin:
@@ -100,7 +86,12 @@ services:
     restart: always
     env_file:
       - .env
-      #- ./services/mysql/.env
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_USER=${MYSQL_ROOT_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - "8989:3306"
     volumes:
