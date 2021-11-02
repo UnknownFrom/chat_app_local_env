@@ -6,6 +6,7 @@ init:
 	cd ./services/users_api/web/app && composer install
 	cd ./services/frontend/composer && composer install
 	cd ./services/chat_api && npm install
+	cd ./docker && docker-compose build
 start:
 	cd ./docker && docker-compose up -d
 migrate:
