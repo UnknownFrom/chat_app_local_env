@@ -15,4 +15,5 @@ restart: down start
 down:
 	cd ./docker && docker-compose stop
 	cd ./docker && docker-compose -f stack.yml down
+	cd ./docker && docker-compose down
 
