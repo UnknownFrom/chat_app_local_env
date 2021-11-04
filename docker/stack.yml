@@ -1,23 +1,6 @@
 version: '3.8'
 services:
-  # MySQL
-  chat_app_mysqldb:
-    build:
-      context: ../
-      dockerfile: ./docker/services/mysql/Dockerfile
-    container_name: ${MYSQL_HOST}
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    env_file:
-      - .env
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    ports:
-      - "8989:3306"
-    volumes:
-      - "./services/mysql/data:/var/lib/mysql"
- 
- # PHP MyAdmin
+  # PHP MyAdmin
   chat_app_myadmin:
     build:
       context: ../
@@ -31,3 +14,26 @@ services:
     restart: always
     depends_on:
       - chat_app_mysqldb
+
+  # MySQL
+  chat_app_mysqldb:
+    build:
+      context: ../
+      dockerfile: ./docker/services/mysql/Dockerfile
+    container_name: ${MYSQL_HOST}
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_USER=${MYSQL_ROOT_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "8989:3306"
+    volumes:
+      - "./services/mysql/data:/var/lib/mysql"
+
+
