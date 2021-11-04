@@ -1,7 +1,7 @@
 init:
-	(git clone git@github.com:UnknownFrom/chat_app_users_api ./services/users_api || true)
-	(git clone git@github.com:UnknownFrom/chat_app_chat_api ./services/chat_api || true)
-	(git clone git@github.com:UnknownFrom/chat_app_frontend ./services/frontend || true)
+	(sudo git clone git@github.com:UnknownFrom/chat_app_users_api ./services/users_api || true)
+	(sudo git clone git@github.com:UnknownFrom/chat_app_chat_api ./services/chat_api || true)
+	(sudo git clone git@github.com:UnknownFrom/chat_app_frontend ./services/frontend || true)
 	cd ./services/users_api/web/app && composer install
 	cd ./services/frontend/composer && composer install
 	cd ./services/chat_api && npm install
