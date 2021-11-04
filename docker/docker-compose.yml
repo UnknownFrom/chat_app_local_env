@@ -7,8 +7,8 @@ services:
       context: ../
       dockerfile: ./docker/services/nginx/Dockerfile
     volumes:
-      - ./services/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./services/nginx/sites-available:/etc/nginx/sites-available
+      - ./services/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      #- ./services/nginx/sites-available:/etc/nginx/sites-available
       - ../services/frontend:/var/www/html/frontend
     ports:
       - "80:80"
@@ -30,8 +30,6 @@ services:
     volumes:
       - "./services/users_api/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - "../services/users_api:/var/www/html/users_api"
-    depends_on:
-      - chat_app_mysqldb
 
   # Frontend PHP
   chat_app_frontend_php:
@@ -44,8 +42,6 @@ services:
     volumes:
       - "./services/frontend/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - "../services/frontend:/var/www/html/frontend"
-    depends_on:
-      - chat_app_mysqldb
 
   # PHP MyAdmin
   chat_app_myadmin:
@@ -59,8 +55,6 @@ services:
       - PMA_ARBITRARY=1
       - PMA_HOST=${MYSQL_HOST}
     restart: always
-    depends_on:
-      - chat_app_mysqldb
 
   # Node
   chat_app_nodejs:
@@ -73,7 +67,5 @@ services:
       - "../services/chat_api:/var/www/chat_api"
     ports:
       - "8000:8000"
-    depends_on:
-      - chat_app_mysqldb
 
 
