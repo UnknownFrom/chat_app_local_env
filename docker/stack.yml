@@ -16,3 +16,18 @@ services:
       - "8989:3306"
     volumes:
       - "./services/mysql/data:/var/lib/mysql"
+ 
+ # PHP MyAdmin
+  chat_app_myadmin:
+    build:
+      context: ../
+      dockerfile: ./docker/services/myadmin/Dockerfile
+    container_name: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=${MYSQL_HOST}
+    restart: always
+    depends_on:
+      - chat_app_mysqldb
